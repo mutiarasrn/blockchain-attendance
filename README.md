@@ -6,7 +6,7 @@ Decentralized & tamper-proof attendance logging system built with Solidity, Hard
 
 - ✅ **Privacy-Focused**: IDs and names are hashed on-chain (only cryptographic hashes stored)
 - ✅ **Tamper-Proof**: Immutable records on blockchain
-- ✅ **Multi-Status**: HADIR, IZIN, SAKIT, ALPA
+- ✅ **Multi-Status**: HADIR, TIDAK HADIR
 - ✅ **Flexible**: Works for students, employees, or any group
 - ✅ **Multi-Wallet Support**: Connect with any Web3 wallet (MetaMask, Coinbase Wallet, etc.)
 - ✅ **Local Development**: Test with Hardhat local node (unlimited testnet ETH)
