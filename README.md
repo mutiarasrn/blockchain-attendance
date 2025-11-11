@@ -2,6 +2,9 @@
 
 Decentralized & tamper-proof attendance logging system built with Solidity, Hardhat, and Ethers.js.
 
+Deployment link: https://blockchain-attendance.vercel.app/
+Smartcontract deployment: https://sepolia.basescan.org/address/0xd24ed1eB1fb4f3b6217A33cf005d60b06C09547c#code
+
 ## 🎯 Features
 
 - ✅ **Privacy-Focused**: IDs and names are hashed on-chain (only cryptographic hashes stored)
@@ -31,13 +34,15 @@ Decentralized & tamper-proof attendance logging system built with Solidity, Hard
 ### On-Chain (Blockchain)
 ```solidity
 struct AttendanceRecord {
-    uint256 recordId;        // Auto-increment ID
-    bytes32 idHash;          // Hash of ID (NIM/Employee ID)
-    bytes32 nameHash;        // Hash of name
-    uint256 timestamp;       // block.timestamp
-    Status status;           // HADIR, IZIN, SAKIT, ALPA
-    address recorder;        // Who recorded (msg.sender)
-}
+        uint256 recordId;           // Auto-increment ID
+        bytes32 idHash;             // Hash dari ID (NIM/nomor karyawan/employee ID)
+        bytes32 nameHash;           // Hash dari nama
+        uint256 timestamp;          // Waktu pencatatan
+        bool isPresent;             // true = HADIR, false = TIDAK HADIR
+        string reason;              // Alasan tidak hadir (kosong jika hadir)
+        bytes32 documentHash;       // Hash dari dokumen penunjang (0x0 jika tidak ada)
+        address recorder;           // Address yang mencatat
+    }
 ```
 
 ### Off-Chain (LocalStorage)
@@ -336,28 +341,3 @@ npx hardhat run scripts/deploy.js --network sepolia
 - [Ethers.js Docs](https://docs.ethers.org/v6/)
 - [Solidity Docs](https://docs.soliditylang.org/)
 - [OpenZeppelin Contracts](https://docs.openzeppelin.com/contracts/)
-
----
-
-## 📄 License
-
-MIT
-
----
-
-## 🤝 Contributing
-
-Feel free to fork and customize for your needs!
-
----
-
-## 📧 Support
-
-If you encounter issues:
-1. Check the Troubleshooting section
-2. Check browser console for errors
-3. Check Hardhat node terminal for errors
-
----
-
-**Built with ❤️ for decentralized attendance tracking**
