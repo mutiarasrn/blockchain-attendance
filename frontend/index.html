@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Attendance System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Blockchain Attendance</h1>
+                <p class="subtitle">Decentralized & Tamper-Proof Attendance Logging</p>
+            </div>
+        </header>
+
+        <!-- Wallet Connection Section -->
+        <div class="wallet-section">
+            <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
+            <div id="walletInfo" class="wallet-info hidden">
+                <span><strong>Connected:</strong> <span id="walletAddress"></span></span>
+                <button id="disconnectBtn" class="btn btn-secondary">Disconnect</button>
+            </div>
+        </div>
+
+        <!-- Contract Info -->
+        <div class="contract-info">
+            <p>
+                <strong>Contract Address:</strong>
+                <span id="contractAddress">Not deployed yet</span>
+                <a href="https://sepolia.basescan.org/address/0xd24ed1eB1fb4f3b6217A33cf005d60b06C09547c#code" target="_blank" class="contract-link">View on Basescan ↗</a>
+            </p>
+            <p><strong>Total Records:</strong> <span id="totalRecords">0</span></p>
+        </div>
+
+        <!-- Attendance Form -->
+        <div class="form-section">
+            <h2>Log Attendance</h2>
+            <form id="attendanceForm">
+                <div class="form-group">
+                    <label for="personId">ID:</label>
+                    <input
+                        type="text"
+                        id="personId"
+                        placeholder="e.g., 123456789"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="personName">Name:</label>
+                    <input
+                        type="text"
+                        id="personName"
+                        placeholder="e.g., Budi Santoso"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Status:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="status" value="present" checked>
+                            <span>Hadir</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="status" value="absent">
+                            <span>Tidak Hadir</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="absentFields" class="absent-fields hidden">
+                    <div class="form-group">
+                        <label for="reason">Alasan Tidak Hadir:</label>
+                        <textarea
+                            id="reason"
+                            placeholder="e.g., Sakit, Izin keluarga, dll"
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="document">Dokumen Penunjang (PDF):</label>
+                        <input
+                            type="file"
+                            id="document"
+                            accept=".pdf"
+                        >
+                        <small class="file-info">Upload surat keterangan atau dokumen pendukung (opsional)</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success" id="submitBtn">
+                    Submit Attendance
+                </button>
+            </form>
+
+            <div id="formMessage" class="message hidden"></div>
+        </div>
+
+        <!-- Attendance Records Table -->
+        <div class="records-section">
+            <div class="records-header">
+                <h2>Attendance Records</h2>
+                <button id="refreshBtn" class="btn btn-secondary">Refresh</button>
+            </div>
+
+            <div id="recordsMessage" class="message hidden"></div>
+
+            <div class="table-container">
+                <table id="recordsTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Reason</th>
+                            <th>Document</th>
+                            <th>Timestamp</th>
+                            <th>Recorded By</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsBody">
+                        <tr>
+                            <td colspan="8" class="no-data">No records yet. Submit the first attendance!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <button id="prevBtn" class="btn btn-secondary" disabled>← Previous</button>
+                <span id="pageInfo">Page 1</span>
+                <button id="nextBtn" class="btn btn-secondary" disabled>Next →</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- Ethers.js v6 -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.9.0/dist/ethers.umd.min.js"></script>
+
+    <!-- Web3Modal v3 (AppKit) -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
